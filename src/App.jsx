@@ -1,43 +1,30 @@
-import React, { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import React, { useState, useRef } from 'react'
 
-function App() {
-  const [count, setCount] = useState(0)
+function App() { 
+  const [ searched, setSearched] = useState(false)
+  const pokemonSearched = useRef()
+
+  function handleFormSubmit(e) {
+    setSearched(true)
+    
+    setTimeout(() => {
+      setSearched(false)
+    }, 2000);
+
+    e.preventDefault()
+  }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+    <div>
+      { searched ? <h1>You searched for { pokemonSearched.current.value }</h1> : null}
+      <form onSubmit={handleFormSubmit}>
+        <label htmlFor="pokemonNameInput">
+          Name of the pokemon: 
+          <input ref={pokemonSearched} type="text" name="pokemonNameInput"/>
+        </label>
+
+        <button type="submit">Search</button>
+      </form>
     </div>
   )
 }
