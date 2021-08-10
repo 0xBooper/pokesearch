@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faSearch, faTruckMonster } from "@fortawesome/free-solid-svg-icons"
+import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import Header from "./components/Header.jsx"
 import Stats from './components/Stats.jsx'
+import { toast } from 'react-toastify'
 import "./styles/App.css"
 
 function App() { 
@@ -18,10 +19,29 @@ function App() {
 
     // If the api response isn't ok, tell the user, then return
     const pokeApiResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonSearched.current.value.toLowerCase()}`)
+    
+    if (!pokeApiResponse.ok && pokeApiResponse.status === 404)  {
+      /*toast.error('🦄 Wow so easy!', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });*/ 
+      // TODO: Fix the toast not rendering
+      alert("No pokemon found")
 
-    if (!pokeApiResponse.ok) {
-      alert("That pokemon doesn't exist! Make sure you spelled it correctly")
-      pokemonSearched.current.value = ""
+      setTimeout(() => {
+        pokemonSearched.current.value = ""
+        setSearched(false)
+        return
+      }, 3000)
+    }
+
+    if (!pokeApiResponse.ok && pokeApiResponse.status !== 404) {
+      alert("The api this site relies on may not be functional. Please wait a bit. If it doesn't work, check your internet or check the status of the pokeapi")
       return
     }
 
