@@ -1,14 +1,16 @@
 import React, { useState, useRef } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faSearch } from "@fortawesome/free-solid-svg-icons"
-import "./App.css"
+import { faSearch, faTruckMonster } from "@fortawesome/free-solid-svg-icons"
+import Header from "./components/Header.jsx"
+import Stats from './components/Stats.jsx'
+import "./styles/App.css"
 
 function App() { 
   const [ searched, setSearched] = useState(false)
   const [pokemonStats, setPokemonStats] = useState({})
   const pokemonSearched = useRef()
 
-  async function handleFormSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
 
     // Check the pokemonSearched is empty
@@ -24,34 +26,35 @@ function App() {
     }
 
     // If not, then set the pokemonStats state accordingly
-    const pokeApiJson = await pokeApiResponse.json() // Json-ify the response
+    const pokeData = await pokeApiResponse.json() // Json-ify the response
     setPokemonStats({
-      front_default_sprite: pokeApiJson.sprites.front_default,
-      front_shiny_sprite: pokeApiJson.sprites.front_shiny,
-      abilities: pokeApiJson.abilities,
-      ingame_height: pokeApiJson.height,
-      ingame_weight: pokeApiJson.ingame_weight,
-      // TODO: Finish this
+      front_default_sprite: pokeData.sprites.front_default,
+      front_shiny_sprite: pokeData.sprites.front_shiny,
+      abilities: pokeData.abilities,
+      ingame_height: pokeData.height,
+      ingame_weight: pokeData.ingame_weight,
+      base_experience: pokeData.base_experience,
+      base_hp: pokeData.stats[0].base_stat
     })
+
+    // Then, set the Searched state to true, and render the info
+    setSearched(true)
   }
 
   return (
-    <div>
-      <h1 className="header">Pokesearch | Where you search for pokemon</h1>
+    <div className="container">
+      <Header />
 
-      <form onSubmit={handleFormSubmit} className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <label htmlFor="pokemonNameInput" className="form-input-label">Name of the pokemon: </label>
-        <input className="form-input" ref={pokemonSearched} type="text" name="pokemonNameInput" aria-required/>
+        <input className="form-input" ref={pokemonSearched} type="text" name="pokemonNameInput" aria-required required/>
 
         <button className="form-submit" type="submit">
           <FontAwesomeIcon icon={faSearch} />
         </button>
-
       </form>
 
-      { searched && (
-        <h1>You searched for: {pokemonSearched.current.value}</h1>
-      )}
+      {searched && pokemonStats && <Stats stats={pokemonStats} pokemonName={pokemonSearched.current.value.toLowerCase()}/>}
     </div>
   )
 }
