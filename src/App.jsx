@@ -1,10 +1,19 @@
 import React, { useState, useRef } from 'react'
+import { toast } from 'react-toastify'
+
+// Import FontAwesome stuff
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
+
+// Import components
 import Header from "./components/Header.jsx"
 import Stats from './components/Stats.jsx'
-import { toast } from 'react-toastify'
+
+// Import styles
 import "./styles/App.css"
+import "react-toastify/dist/ReactToastify.css"
+
+toast.configure() // Initialize Toast
 
 function App() { 
   const [ searched, setSearched] = useState(false)
@@ -14,24 +23,11 @@ function App() {
   async function handleSubmit(e) {
     e.preventDefault()
 
-    // Check the pokemonSearched is empty
-    if (!pokemonSearched.current.value) alert("Hey, it can't be empty")
-
-    // If the api response isn't ok, tell the user, then return
-    const pokeApiResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonSearched.current.value.toLowerCase()}`)
+    const pokeApiResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonSearched.current.value.toLowerCase()}`).catch(e => console.error(e))
     
+    // If the response returns a 404, tell the user and return
     if (!pokeApiResponse.ok && pokeApiResponse.status === 404)  {
-      /*toast.error('🦄 Wow so easy!', {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });*/ 
-      // TODO: Fix the toast not rendering
-      alert("No pokemon found")
+      toast.error("No pokemon found. Check your spelling.", {position: "top-center", autoClose: 3000})
 
       setTimeout(() => {
         pokemonSearched.current.value = ""
@@ -40,9 +36,16 @@ function App() {
       }, 3000)
     }
 
-    if (!pokeApiResponse.ok && pokeApiResponse.status !== 404) {
-      alert("The api this site relies on may not be functional. Please wait a bit. If it doesn't work, check your internet or check the status of the pokeapi")
-      return
+    if (!pokeApiResponse.ok && pokeApiResponse.status >= 500 && pokeApiResponse.status <= 599) {
+      toast.warn("The api this site relies on is not functional. Search for the status of the pokeapi", {
+        position: "top-center",
+        autoClose: 3000
+      })
+
+      setTimeout(() => {
+        setSearched(false)
+        return
+      }, )
     }
 
     // If not, then set the pokemonStats state accordingly
@@ -54,11 +57,13 @@ function App() {
       ingame_height: pokeData.height,
       ingame_weight: pokeData.ingame_weight,
       base_experience: pokeData.base_experience,
-      base_hp: pokeData.stats[0].base_stat
+      base_hp: pokeData.stats[0].base_stat,
+      name: pokemonSearched.current.value
     })
 
     // Then, set the Searched state to true, and render the info
     setSearched(true)
+    pokemonSearched.current.value = ""
   }
 
   return (
