@@ -22,7 +22,7 @@ const Stats = ({stats, pokemonName}) => {
             
             <h4>Abilities: </h4>
             <ul className="stats-ability-list">
-                {abilities.map(abilityElement => <li>{abilityElement.ability.name}</li> )}
+                {abilities.map(abilityElement => <li key={abilityElement.ability.slot}>{abilityElement.ability.name}</li> )}
             </ul>
 
             <h4>Basic info: </h4>
