@@ -20,18 +20,16 @@ const Stats = ({stats, pokemonName}) => {
                 {front_shiny_sprite && <img src={front_shiny_sprite} alt="shiny front sprite" />}
             </div>
             
-            
+            <h4>Abilities: </h4>
             <ul className="stats-ability-list">
-                {abilities.forEach(abilityElement => {
-                    // TODO: Fix the li not rendering. (api/misnaming NOT the cause)
-                    <li>{abilityElement.ability.name}</li>
-                })}
+                {abilities.map(abilityElement => <li>{abilityElement.ability.name}</li> )}
             </ul>
 
+            <h4>Basic info: </h4>
             <div className="stats-info-container">
-                {ingame_height && <p>Height of {pokemonName}: {ingame_height}</p>}
-                {ingame_weight && <p>Weight of {pokemonName}: {ingame_weight}</p>}
-                {base_experience && <p>Base experience of {pokemonName}: {base_experience}</p>}
+                {ingame_height && <p>Height of {pokemonName}: {ingame_height} units</p>}
+                {ingame_weight && <p>Weight of {pokemonName}: {ingame_weight} units</p>}
+                {base_experience && <p>Base XP of {pokemonName}: {base_experience}</p>}
                 {base_hp && <p>Base HP of {pokemonName}: {base_hp}</p>}
             </div>
         </div>
