@@ -27,25 +27,22 @@ function App() {
     
     // If the response returns a 404, tell the user and return
     if (!pokeApiResponse.ok && pokeApiResponse.status === 404)  {
-      toast.error("No pokemon found. Check your spelling.", {position: "top-center", autoClose: 3000})
+      toast.error("No pokemon found. Check your spelling.", {position: "top-center", autoClose: 3000, limit: 1})
 
-      setTimeout(() => {
-        pokemonSearched.current.value = ""
-        setSearched(false)
-        return
-      }, 3000)
+      pokemonSearched.current.value = ""
+      setSearched(false)
+      return
     }
 
     if (!pokeApiResponse.ok && pokeApiResponse.status >= 500 && pokeApiResponse.status <= 599) {
       toast.warn("The api this site relies on is not functional. Search for the status of the pokeapi", {
         position: "top-center",
-        autoClose: 3000
+        autoClose: 3000,
+        limit: 1
       })
 
-      setTimeout(() => {
-        setSearched(false)
-        return
-      }, )
+      setSearched(false)
+      return
     }
 
     // If not, then set the pokemonStats state accordingly
