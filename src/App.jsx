@@ -57,8 +57,7 @@ function App() {
       ingame_height: pokeData.height,
       ingame_weight: pokeData.ingame_weight,
       base_experience: pokeData.base_experience,
-      base_hp: pokeData.stats[0].base_stat,
-      name: pokemonSearched.current.value
+      base_hp: pokeData.stats[0].base_stat
     })
 
     // Then, set the Searched state to true, and render the info
@@ -71,7 +70,7 @@ function App() {
       <Header />
 
       <form className="form" onSubmit={handleSubmit}>
-        <label htmlFor="pokemonNameInput" className="form-input-label">Name of the pokemon: </label>
+        <label htmlFor="pokemonNameInput" className="form-input-label"></label>
         <input className="form-input" ref={pokemonSearched} type="text" name="pokemonNameInput" aria-required required/>
 
         <button className="form-submit" type="submit">
