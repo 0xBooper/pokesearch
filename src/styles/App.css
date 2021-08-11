@@ -15,12 +15,18 @@ body {
 
 .header h1 {
     font-size: 2rem;
+    margin-bottom: 5px;
 }
 
 .header p {
     position: absolute;
-    top: 10%;
+    top: 15%;
     text-align: center;
+    overflow: auto;
+}
+
+.header {
+    margin-bottom: 50px;
 }
 
 .header,
@@ -37,6 +43,10 @@ body {
 
 .form {
     margin-top: 25px;
+}
+
+.form-input-label::before {
+    content: "Name of the pokemon: "
 }
 
 .form-input,
@@ -76,4 +86,13 @@ body {
 .stats-sprites-container,
 .stats-info-container {
     flex-direction: row;
+}
+
+
+/* Specific styles for a mobile-like devices */
+
+@media (max-width: 472px) {
+    .form-input-label::before {
+        content: "Pokemon:";
+    }
 }
