@@ -1,4 +1,5 @@
 import React from 'react'
+import "../styles/Stats.css"
 
 const Stats = ({stats, pokemonName}) => {
     // Get all the props
