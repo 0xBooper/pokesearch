@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { toast } from 'react-toastify'
 
-// Import FontAwesome stuff
+// Import FontAwesome icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 
@@ -11,13 +11,14 @@ import Stats from './components/Stats.jsx'
 
 // Import styles
 import "./styles/App.css"
-import "react-toastify/dist/ReactToastify.css"
+import "react-toastify/dist/ReactToastify.css" // This css file is required for Toastify
 
 toast.configure() // Initialize Toast
 
 function App() { 
   const [ searched, setSearched] = useState(false)
   const [pokemonStats, setPokemonStats] = useState({})
+  const [pokeName, setPokeName] = useState("")
   const pokemonSearched = useRef()
 
   async function handleSubmit(e) {
@@ -26,21 +27,23 @@ function App() {
     const pokeApiResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonSearched.current.value.toLowerCase()}`).catch(e => console.error(e))
     
     // If the response returns a 404, tell the user and return
-    if (!pokeApiResponse.ok && pokeApiResponse.status === 404)  {
+    if (pokeApiResponse.status === 404)  {
       toast.error("No pokemon found. Check your spelling.", {position: "top-center", autoClose: 3000, limit: 1})
 
       pokemonSearched.current.value = ""
+      setPokeName("")
       setSearched(false)
       return
     }
 
-    if (!pokeApiResponse.ok && pokeApiResponse.status >= 500 && pokeApiResponse.status <= 599) {
+    if (pokeApiResponse.status >= 500 && pokeApiResponse.status <= 599) {
       toast.warn("The api this site relies on is not functional. Search for the status of the pokeapi", {
         position: "top-center",
         autoClose: 3000,
         limit: 1
       })
 
+      setPokeName("")
       setSearched(false)
       return
     }
@@ -59,23 +62,24 @@ function App() {
 
     // Then, set the Searched state to true, and render the info
     setSearched(true)
+    setPokeName(pokemonSearched.current.value.toLowerCase()) 
     pokemonSearched.current.value = ""
   }
-
+  
   return (
     <div className="container">
       <Header />
 
       <form className="form" onSubmit={handleSubmit}>
         <label htmlFor="pokemonNameInput" className="form-input-label"></label>
-        <input className="form-input" ref={pokemonSearched} type="text" name="pokemonNameInput" aria-required required/>
+        <input className="form-input" ref={pokemonSearched} type="text" name="pokemonNameInput" aria-required required/> //? aria-required may not be needed
 
         <button className="form-submit" type="submit">
           <FontAwesomeIcon icon={faSearch} />
         </button>
       </form>
 
-      {searched && pokemonStats && <Stats stats={pokemonStats} pokemonName={pokemonSearched.current.value.toLowerCase()}/>}
+      {searched && pokemonStats && <Stats stats={pokemonStats} pokemonName={pokeName}/>}
     </div>
   )
 }
