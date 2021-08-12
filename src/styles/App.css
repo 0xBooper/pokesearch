@@ -64,5 +64,6 @@ body {
 }
 
 .form-submit:hover {
-    background-color: #2bff4e;
+    color: #ff952b;
+    background-color: white;
 }
