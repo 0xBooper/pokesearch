@@ -71,9 +71,8 @@ function App() {
       <Header />
 
       <form className="form" onSubmit={handleSubmit}>
-        <label htmlFor="pokemonNameInput" className="form-input-label"></label>
-        <input className="form-input" ref={pokemonSearched} type="text" name="pokemonNameInput" aria-required required/> //? aria-required may not be needed
-
+        <label htmlFor="pokemonNameInput" className="form-input-label">Pokemon:</label>
+        <input className="form-input" ref={pokemonSearched} type="text" name="pokemonNameInput" aria-required required placeholder="e.g Charizard"/> 
         <button className="form-submit" type="submit">
           <FontAwesomeIcon icon={faSearch} />
         </button>
