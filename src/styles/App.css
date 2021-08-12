@@ -15,40 +15,31 @@ body {
     min-height: 100vh;
 }
 
+
+/* Styles for the header specifically */
+
 .header h1 {
     font-size: 2rem;
     margin-bottom: 5px;
+    text-align: center;
 }
 
 .header p {
-    position: absolute;
-    top: 10%;
     text-align: center;
-    overflow: auto;
 }
 
 .header {
-    margin-bottom: 50px;
-}
-
-.header,
-.form,
-.stats-container {
-    min-height: 10vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-bottom: 15px;
 }
 
 
 /* Styles for the form specifically */
 
 .form {
-    margin-top: 25px;
-}
-
-.form-input-label::before {
-    content: "Name of the pokemon: "
+    min-height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .form-input,
@@ -73,28 +64,5 @@ body {
 }
 
 .form-submit:hover {
-    background: white;
-    color: #ff952b;
-}
-
-
-/* Styles for the Stats specifically */
-
-.stats-container {
-    border-top: 3px solid whitesmoke;
-    flex-direction: column;
-}
-
-.stats-sprites-container,
-.stats-info-container {
-    flex-direction: row;
-}
-
-
-/* Specific styles for a mobile-like devices */
-
-@media (max-width: 472px) {
-    .form-input-label::before {
-        content: "Pokemon:";
-    }
+    background-color: #2bff4e;
 }

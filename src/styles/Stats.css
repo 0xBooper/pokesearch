@@ -1,0 +1,13 @@
+.stats-container {
+    min-height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 3px solid whitesmoke;
+    flex-direction: column;
+}
+
+.stats-sprites-container,
+.stats-info-container {
+    flex-direction: row;
+}
