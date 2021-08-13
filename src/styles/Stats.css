@@ -7,7 +7,6 @@
     flex-direction: column;
 }
 
-.stats-sprites-container,
-.stats-info-container {
+.stats-sprites-container {
     flex-direction: row;
 }
