@@ -10,7 +10,7 @@ const Stats = ({stats, pokemonName}) => {
         ingame_height,
         ingame_weight,
         base_experience,
-        base_hp
+        base_stats
     } = stats
 
     return (
@@ -26,13 +26,19 @@ const Stats = ({stats, pokemonName}) => {
                 {abilities.map(abilityElement => <li key={abilityElement.ability.slot}>{abilityElement.ability.name}</li> )}
             </ul>
 
-            <h4>Basic info: </h4>
-            <div className="stats-info-container">
-                {ingame_height && <p>Height of {pokemonName}: {ingame_height} units</p>}
-                {ingame_weight && <p>Weight of {pokemonName}: {ingame_weight} units</p>}
-                {base_experience && <p>Base XP of {pokemonName}: {base_experience}</p>}
-                {base_hp && <p>Base HP of {pokemonName}: {base_hp}</p>}
+            <h4>Body stats: </h4>
+            <div>
+                <p>Height: {ingame_height} units | Weight: {ingame_weight}</p>
             </div>
+
+            <h4>Base stats:</h4>
+            <ul>
+                {base_experience && <li key="xp-stat">Base XP: {base_experience}</li>}
+                {base_stats[0] && <li kay="hp-stat">Base HP: {base_stats[0].base_stat}</li>}
+                {base_stats.slice(1) && base_stats.slice(1).map(statElement => (
+                    <li key={statElement.stat.name}>Base {statElement.stat.name}: {statElement.base_stat}</li>
+                ))}
+            </ul>
         </div>
     )
 }
