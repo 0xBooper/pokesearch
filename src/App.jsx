@@ -55,9 +55,9 @@ function App() {
       front_shiny_sprite: pokeData.sprites.front_shiny,
       abilities: pokeData.abilities,
       ingame_height: pokeData.height,
-      ingame_weight: pokeData.ingame_weight,
+      ingame_weight: pokeData.weight,
       base_experience: pokeData.base_experience,
-      base_hp: pokeData.stats[0].base_stat
+      base_stats: pokeData.stats
     })
 
     // Then, set the Searched state to true, and render the info
