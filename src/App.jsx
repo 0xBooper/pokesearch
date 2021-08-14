@@ -8,6 +8,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons"
 // Import components
 import Header from "./components/Header.jsx"
 import Stats from './components/Stats.jsx'
+import Footer from './components/Footer.jsx'
 
 // Import styles
 import "./styles/App.css"
@@ -79,6 +80,8 @@ function App() {
       </form>
 
       {searched && pokemonStats && <Stats stats={pokemonStats} pokemonName={pokeName}/>}
+
+      <Footer />
     </div>
   )
 }
