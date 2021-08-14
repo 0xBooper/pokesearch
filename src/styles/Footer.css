@@ -1,0 +1,22 @@
+.footer {
+    background: #333333;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 0.2rem 1rem;
+    color: hsla(0, 0%, 96%, 0.72);
+}
+
+.footer a {
+    text-decoration: none;
+    color: hsla(0, 0%, 96%, 0.72);
+    transition: color 1000ms ease;
+}
+
+.footer a:hover {
+    color: white;
+}
