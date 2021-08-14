@@ -41,7 +41,6 @@ const Stats = ({stats, pokemonName}) => {
                 }
                 {base_stats[0] && <li kay="hp-stat">Base HP: {base_stats[0].base_stat}</li>}
 
-$:
                 {
                 // ? Code below loops for each stat in base_stats
                 // ? except for the hp-stat. Then, it shows it.
