@@ -2,7 +2,7 @@ import React from 'react'
 import "../styles/Stats.css"
 
 const Stats = ({stats, pokemonName}) => {
-    // Get all the props
+    // ? Destructure the stats props
     const {
         front_default_sprite,
         front_shiny_sprite,
@@ -34,9 +34,22 @@ const Stats = ({stats, pokemonName}) => {
             <h4>Base stats:</h4>
             <ul>
                 {base_experience && <li key="xp-stat">Base XP: {base_experience}</li>}
+
+                { 
+                // ? Code below isn't included in the base_stats loop
+                // ? because hp should be capitalized to HP. 
+                }
                 {base_stats[0] && <li kay="hp-stat">Base HP: {base_stats[0].base_stat}</li>}
+
+$:
+                {
+                // ? Code below loops for each stat in base_stats
+                // ? except for the hp-stat. Then, it shows it.
+                // ? It also replaces any dashes with spaces, e.g:
+                // ? special-defense => special defense
+                }  
                 {base_stats.slice(1) && base_stats.slice(1).map(statElement => (
-                    <li key={statElement.stat.name}>Base {statElement.stat.name}: {statElement.base_stat}</li>
+                    <li key={statElement.stat.name}>Base {statElement.stat.name.replace("-", " ")}: {statElement.base_stat}</li>
                 ))}
             </ul>
         </div>
