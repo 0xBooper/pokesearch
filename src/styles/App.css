@@ -16,26 +16,10 @@ body {
 }
 
 
-/* Styles for the header specifically */
-
-.header h1 {
-    font-size: 2rem;
-    margin-bottom: 5px;
-    text-align: center;
-}
-
-.header p {
-    text-align: center;
-}
-
-.header {
-    margin-bottom: 15px;
-}
-
-
 /* Styles for the form specifically */
 
 .form {
+    margin-bottom: 30px;
     min-height: 10vh;
     display: flex;
     justify-content: center;
@@ -64,5 +48,6 @@ body {
 }
 
 .form-submit:hover {
-    background-color: #2bff4e;
+    color: #ff952b;
+    background: white;
 }

@@ -1,0 +1,13 @@
+.header h1 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.header p {
+    text-align: center;
+}
+
+.header {
+    margin-bottom: 15px;
+}
