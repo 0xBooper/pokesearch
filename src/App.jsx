@@ -1,14 +1,11 @@
 import React, { useState, useRef } from 'react'
 import { toast } from 'react-toastify'
 
-// Import FontAwesome icons
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faSearch } from "@fortawesome/free-solid-svg-icons"
-
 // Import components
 import Header from "./components/Header.jsx"
 import Stats from './components/Stats.jsx'
 import Footer from './components/Footer.jsx'
+import Form from "./components/Form.jsx"
 
 // Import styles
 import "./styles/App.css"
@@ -71,13 +68,7 @@ function App() {
     <div className="container">
       <Header />
 
-      <form className="form" onSubmit={handleSubmit}>
-        <label htmlFor="pokemonNameInput" className="form-input-label">Pokemon:</label>
-        <input className="form-input" ref={pokemonSearched} type="text" name="pokemonNameInput" aria-required required placeholder="e.g Charizard"/> 
-        <button className="form-submit" type="submit">
-          <FontAwesomeIcon icon={faSearch} />
-        </button>
-      </form>
+      <Form handleSubmitProp={handleSubmit} pokemonSearchedRef={pokemonSearched} />
 
       {searched && pokemonStats && <Stats stats={pokemonStats} pokemonName={pokeName}/>}
 
