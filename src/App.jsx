@@ -19,6 +19,8 @@ function App() {
   const [pokeName, setPokeName] = useState("")
   const pokemonSearched = useRef()
 
+  const latestVersion = "1.1.2" // ? Latest version. Currently hard-coded but I plan to make it fetch it from some api.
+
   async function handleSubmit(e) {
     e.preventDefault()
 
@@ -72,7 +74,7 @@ function App() {
 
       {searched && pokemonStats && <Stats stats={pokemonStats} pokemonName={pokeName}/>}
 
-      <Footer />
+      <Footer latestVer={latestVersion} />
     </div>
   )
 }
