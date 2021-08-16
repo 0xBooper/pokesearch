@@ -7,10 +7,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // ? CSS imports
 import "../styles/Footer.css"
 
-const Footer = () => {
+const Footer = ({latestVer}) => {
     return (
         <div className="footer">
-            <p>Made by <a href="https://0xBooper.github.io" target="_blank">0xBooper | epikbooperia</a>.</p>
+            <p>Made by <a href="https://0xBooper.github.io" target="_blank">0xBooper</a>.</p>
+            <p>v{latestVer}</p>
             <a href="https://github.com/0xBooper/pokesearch" target="_blank" rel="noopener noreferrer">
                 <FontAwesomeIcon icon={faGithub} size="lg" />
             </a>
