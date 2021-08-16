@@ -11,6 +11,8 @@ import Form from "./components/Form.jsx"
 import "./styles/App.css"
 import "react-toastify/dist/ReactToastify.css" // This css file is required for Toastify
 
+import { version } from "../package.json"
+
 toast.configure() // Initialize Toast
 
 function App() { 
@@ -18,8 +20,6 @@ function App() {
   const [pokemonStats, setPokemonStats] = useState({})
   const [pokeName, setPokeName] = useState("")
   const pokemonSearched = useRef()
-
-  const latestVersion = "1.1.2" // ? Latest version. Currently hard-coded but I plan to make it fetch it from some api.
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -74,7 +74,7 @@ function App() {
 
       {searched && pokemonStats && <Stats stats={pokemonStats} pokemonName={pokeName}/>}
 
-      <Footer latestVer={latestVersion} />
+      <Footer latestVer={version} />
     </div>
   )
 }
