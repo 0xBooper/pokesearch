@@ -11,7 +11,7 @@ const Form = ({ handleSubmitProp, pokemonSearchedRef }) => {
     return (
         <form className="form" onSubmit={handleSubmitProp}>
             <label htmlFor="pokemonNameInput" className="form-input-label">Pokemon:</label>
-            <input className="form-input" ref={pokemonSearchedRef} type="text" name="pokemonNameInput" aria-required required placeholder="e.g Charizard"/> 
+            <input className="form-input" ref={pokemonSearchedRef} type="text" name="pokemonNameInput" id="pokemonNameInput" aria-required required placeholder="e.g Charizard"/> 
             <button className="form-submit" type="submit">
                 <FontAwesomeIcon icon={faSearch} />
             </button>
